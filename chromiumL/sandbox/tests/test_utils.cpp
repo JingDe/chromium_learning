@@ -3,6 +3,7 @@
 #include<sys/wait.h>
 
 #include"base/posix/eintr_wrapper.h"
+#include"base/logging.h"
 
 /*
 int waitid(idtype_t idtype, id_t id, siginfo_t *infop, int options);
@@ -18,9 +19,9 @@ bool TestUtils::CurrentProcessHasChildren()
 	int ret = HANDLE_EINTR(waitid(P_ALL, 0, &process_info, WEXITED | WNOHANG | WNOWAIT));
 	if (-1 == ret)
 	{
-		PCHECK(ECHILD == errno); // ECHILD调用进程没有正在推出的没有wait的子进程
-		return false;
+		PCHECK(ECHILD == errno); // ECHILD调用进程没有正在退出的没有wait的子进程
+		return false; // ??没有子进程
 	}
-	else
+	else // ??有子进程
 		return true;
 }
