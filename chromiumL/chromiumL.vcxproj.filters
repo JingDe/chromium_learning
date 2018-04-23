@@ -4,10 +4,78 @@
     <Filter Include="sandbox">
       <UniqueIdentifier>{96508582-2995-473a-8c2a-5fe4bedae00b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sandbox\tests">
+      <UniqueIdentifier>{a6a0cd7a-881d-4226-aa80-d9980a22e596}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="testing">
+      <UniqueIdentifier>{ae5d16d3-1752-44c0-b790-8f5068f788a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="testing\gtest">
+      <UniqueIdentifier>{f51e74c0-a419-417a-8479-8c4dbc4876d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="testing\gtest\include">
+      <UniqueIdentifier>{0505705c-5a2f-44bb-a6fd-64ccd589f82e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="testing\gtest\include\gtest">
+      <UniqueIdentifier>{b4569fef-40cd-42df-9728-1c674cb9d520}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{fe645e68-d300-4249-b246-1cf081a978cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\test">
+      <UniqueIdentifier>{ec1d29ca-5ff5-409d-a5dc-2441e15d3f28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\posix">
+      <UniqueIdentifier>{7b6de039-73a9-4ff8-8b7e-921c305c612a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\strings">
+      <UniqueIdentifier>{5df5ef71-b095-453f-b8ce-1d66e35ad002}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sandbox\sandbox_export.h">
       <Filter>sandbox</Filter>
     </ClInclude>
+    <ClInclude Include="sandbox\tests\test_utils.h">
+      <Filter>sandbox\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\tests\unit_test.h">
+      <Filter>sandbox\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="testing\gtest\include\gtest\gtest.h">
+      <Filter>testing\gtest\include\gtest</Filter>
+    </ClInclude>
+    <ClInclude Include="base\test\test_suite.h">
+      <Filter>base\test</Filter>
+    </ClInclude>
+    <ClInclude Include="testing\multiprocess_func_list.h">
+      <Filter>testing</Filter>
+    </ClInclude>
+    <ClInclude Include="base\logging.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\base_export.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\string_piece.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="base\posix\eintr_wrapper.h">
+      <Filter>base\posix</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\string_piece_forward.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sandbox\tests\main.cc">
+      <Filter>sandbox\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="sandbox\tests\test_utils.cpp">
+      <Filter>sandbox\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="base\logging.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

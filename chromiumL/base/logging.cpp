@@ -8,6 +8,16 @@
 
 namespace logging {
 
+	const char* const log_severity_names[] = {"INFO", "WARNING", "ERROR", "FATAL"};
+	static_assert(LOG_NUM_SEVERITIES == arraysize(log_severity_names), "Incorrect number of log_severity_names");
+
+	const char* log_severity_name(int severity)
+	{
+		if (severity >= 0 && severity < LOG_NUM_SEVERITIES)
+			return log_severity_names[severity];
+		return "UNKNOWN";
+	}
+
 	bool g_log_process_id = false;
 	bool g_log_thread_id = false;
 	bool g_log_timestamp = true;
@@ -50,7 +60,7 @@ namespace logging {
 	uint64_t TickCount()
 	{
 #if defined(OS_WIN)
-		return GetTickCount();
+		return GetTickCount(); // 系统启动的毫秒数
 #elif defined(OS_POSIX)
 		struct timespec ts; // 秒、纳秒
 		clock_gettime(CLOCK_MONOTONIC, &ts);
@@ -107,8 +117,85 @@ namespace logging {
 		if (g_log_tickcount)
 			stream_ << TickCount() << ':';
 
+		if (severity_ >= 0)
+			stream_ << log_severity_name(severity_);
+		else
+			stream_ << "VERBOSE" << -severity_;
+
+		stream_ << ":" << filename << "(" << line << ")]";
+
+		message_start_ = stream_.str().length();
 	}
 
+	LogMessage::~LogMessage()
+	{
+		size_t stack_start = stream_.tellp(); // 流的当前位置
+#if !defined(OFFICIAL_BUILD) && !defined(OS_NACL) && !defined(__UCLIBC__) && \
+    !defined(OS_AIX)
+		if (severity_ == LOG_FATAL && !base::debug::BeingDebugged())
+		{
+			base::debug::StackTrace trace;
+			stream_ << std::endl;
+			trace.OutputToStream(&stream_);
+		}
+#endif
+		stream_ << std::endl;
+		std::string str_newline(stream_.str());
+
+		if (log_message_handler &&  log_message_handler(severity_, file_, line_, message_start_, str_newline))
+		{
+			return;
+		}
+
+		if ((g_logging_destination  &  LOG_TO_SYSTEM_DEBUG_LOG) != 0)
+		{
+			// ...
+			ignore_result(fwrite(str_newline.data(), str_newling.size(), 1, stderr));
+			fflush(stderr);
+		}
+		else if (severity_ >= kAlwaysPrintErrorLevel)
+		{
+			ignore_result(fwrite(str_newline.data(), str_newling.size(), 1, stderr));
+			fflush(stderr);
+		}
+
+		// 写到日志文件
+		if ((g_logging_destination & LOG_TO_FILE) != 0)
+		{
+#if !defined(OS_WIN)
+			LoggingLock::Init(CLOCK_LOG_FILE, nullptr);
+			LoggingLock logging_lock;
+#endif
+			if (InitializeLogFileHandle())
+			{
+#if defined(OS_WIN)
+				//
+#else
+				ignore_result(fwrite(str_newline.data(), str_newling.size(), 1, g_log_file));
+				fflush(g_log_file);
+#endif
+			}
+		}
+
+		if (severity_ == LOG_FATAL)
+		{
+			// 写到全局activity tracker
+
+			if (log_assert_handler_stack.IsCreated() && !log_assert_handler_stack.Get().empty())
+			{
+
+			}
+			else
+			{
+#ifndef NDEBUG
+				if (!base::debug::BegingDebugged())
+					DisplayDebugMessageInDialog(stream_.str());
+#endif
+				base::debug::BreakDebugger();
+			}
+
+		}
+	}
 
 	ErrnoLogMessage::ErrnoLogMessage(const char* file, int line, LogSeverity severity, SystemErrorCode err)
 		:err_(err),

@@ -60,10 +60,37 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>D:\WorkSpace\chromium\chromium_learning\chromiumL;D:\WorkSpace\linux_usr_include\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemGroup>
+    <ClInclude Include="base\base_export.h" />
+    <ClInclude Include="base\logging.h" />
+    <ClInclude Include="base\posix\eintr_wrapper.h" />
+    <ClInclude Include="base\strings\string_piece.h" />
+    <ClInclude Include="base\strings\string_piece_forward.h" />
+    <ClInclude Include="base\test\test_suite.h" />
     <ClInclude Include="sandbox\sandbox_export.h" />
+    <ClInclude Include="sandbox\tests\test_utils.h" />
+    <ClInclude Include="sandbox\tests\unit_test.h" />
+    <ClInclude Include="testing\gtest\include\gtest\gtest.h" />
+    <ClInclude Include="testing\multiprocess_func_list.h" />
   </ItemGroup>
-  <ItemDefinitionGroup />
+  <ItemGroup>
+    <ClCompile Include="base\logging.cpp" />
+    <ClCompile Include="sandbox\tests\main.cc" />
+    <ClCompile Include="sandbox\tests\test_utils.cpp" />
+  </ItemGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>OS_POSIX</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions);OS_POSIX</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>
