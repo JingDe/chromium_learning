@@ -7,7 +7,7 @@
 
 #include"base/strings/string_piece.h"
 #include"base/threading/platform_thread.h"
-
+#include"base/debug/stack_trace.h"
 
 
 namespace logging {

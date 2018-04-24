@@ -1,6 +1,8 @@
 #ifndef BASE_STRING_PIECE_H_
 #define BASE_STRING_PIECE_H_
 
+#include "base/strings/string_piece_forward.h"
+
 namespace base {
 	template <typename STRING_TYPE> class BasicStringPiece {
 	public:

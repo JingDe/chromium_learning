@@ -1,9 +1,11 @@
 
-#include"base/test/test_suite.h"
+#include<string>
 
+#include"base/bind.h"
+#include"base/command_line.h"
+#include"base/test/test_suite.h"
 #include"sandbox/tests/test_utils.h"
 #include"sandbox/tests/unit_test.h"
-
 #include"testing/gtest/include/gtest/gtest.h"
 #include"testing/multiprocess_func_list.h"
 
@@ -22,6 +24,8 @@ void RunPostTestsChecks(const base::FilePath& orig_cwd)
 
 int main(int argc, char* argv[])
 {
+	base::CommandLine::Init(argc, argv);
+	std::string client_func;
 
 	base::FilePath orig_cwd;
 

@@ -31,6 +31,15 @@
     <Filter Include="base\strings">
       <UniqueIdentifier>{5df5ef71-b095-453f-b8ce-1d66e35ad002}</UniqueIdentifier>
     </Filter>
+    <Filter Include="base\threading">
+      <UniqueIdentifier>{37c6bd44-1695-4fd5-a791-f5baf50411d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\debug">
+      <UniqueIdentifier>{d516ef35-0c45-4ef2-b3c3-43a4bae0308e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\files">
+      <UniqueIdentifier>{6101f9e5-285d-4e22-acc4-46b72c7788b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sandbox\sandbox_export.h">
@@ -66,6 +75,27 @@
     <ClInclude Include="base\strings\string_piece_forward.h">
       <Filter>base\strings</Filter>
     </ClInclude>
+    <ClInclude Include="base\threading\platform_thread.h">
+      <Filter>base\threading</Filter>
+    </ClInclude>
+    <ClInclude Include="base\macros.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\debug\stack_trace.h">
+      <Filter>base\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="base\command_line.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\bind.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\files\file_path.h">
+      <Filter>base\files</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\string_util.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sandbox\tests\main.cc">
@@ -75,6 +105,21 @@
       <Filter>sandbox\tests</Filter>
     </ClCompile>
     <ClCompile Include="base\logging.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\threading\platform_thread_posix.cpp">
+      <Filter>base\threading</Filter>
+    </ClCompile>
+    <ClCompile Include="base\debug\stack_trace.cpp">
+      <Filter>base\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="base\debug\stack_trace_posix.cpp">
+      <Filter>base\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="base\test\test_suite.cpp">
+      <Filter>base\test</Filter>
+    </ClCompile>
+    <ClCompile Include="base\command_line.cpp">
       <Filter>base</Filter>
     </ClCompile>
   </ItemGroup>

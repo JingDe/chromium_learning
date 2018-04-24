@@ -65,11 +65,18 @@
   </PropertyGroup>
   <ItemGroup>
     <ClInclude Include="base\base_export.h" />
+    <ClInclude Include="base\bind.h" />
+    <ClInclude Include="base\command_line.h" />
+    <ClInclude Include="base\debug\stack_trace.h" />
+    <ClInclude Include="base\files\file_path.h" />
     <ClInclude Include="base\logging.h" />
+    <ClInclude Include="base\macros.h" />
     <ClInclude Include="base\posix\eintr_wrapper.h" />
     <ClInclude Include="base\strings\string_piece.h" />
     <ClInclude Include="base\strings\string_piece_forward.h" />
+    <ClInclude Include="base\strings\string_util.h" />
     <ClInclude Include="base\test\test_suite.h" />
+    <ClInclude Include="base\threading\platform_thread.h" />
     <ClInclude Include="sandbox\sandbox_export.h" />
     <ClInclude Include="sandbox\tests\test_utils.h" />
     <ClInclude Include="sandbox\tests\unit_test.h" />
@@ -77,7 +84,12 @@
     <ClInclude Include="testing\multiprocess_func_list.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="base\command_line.cpp" />
+    <ClCompile Include="base\debug\stack_trace.cpp" />
+    <ClCompile Include="base\debug\stack_trace_posix.cpp" />
     <ClCompile Include="base\logging.cpp" />
+    <ClCompile Include="base\test\test_suite.cpp" />
+    <ClCompile Include="base\threading\platform_thread_posix.cpp" />
     <ClCompile Include="sandbox\tests\main.cc" />
     <ClCompile Include="sandbox\tests\test_utils.cpp" />
   </ItemGroup>
