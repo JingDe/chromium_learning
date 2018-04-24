@@ -1,10 +1,14 @@
 #include"base/logging.h"
-#include"base/strings/string_piece.h"
 
 #include<iomanip>
 
 #include<unistd.h>
 #include<sys/time.h>
+
+#include"base/strings/string_piece.h"
+#include"base/threading/platform_thread.h"
+
+
 
 namespace logging {
 
@@ -82,6 +86,30 @@ namespace logging {
 		Init(file, line);
 	}
 
+	LogMessage::LogMessage(const char* file, int line, const char* condition)
+		:severity_(LOG_FATAL), file_(file), line_(line)
+	{
+		Init(file, line);
+		stream_ << "Check failed: " << condition << ". ";
+	}
+
+	LogMessage::LogMessage(const char* file, int line, std::string* result)
+		:severity_(LOG_FATAL), file_(file), line_(line)
+	{
+		Init(file, line);
+		stream_ << "Check failed: " << *result;
+		delete result;
+	}
+
+	LogMessage::LogMessage(const char* file, int line, LogSeverity severity, std::string* result)
+		:severity_(severity), file_(file), line_(line)
+	{
+		Init(file, line);
+		stream_ << "Check failed: " << *result;
+		delete result;
+	}
+
+	// 日志头格式：[进程ID:线程ID:月日/时分秒.微秒:tick:等级:文件名(行号)]
 	void LogMessage::Init(const char* file, int line)
 	{
 		base::StringPiece filename(file);
@@ -115,14 +143,14 @@ namespace logging {
 		}
 
 		if (g_log_tickcount)
-			stream_ << TickCount() << ':';
+			stream_ << TickCount() << ':'; // 系统启动的tick数
 
 		if (severity_ >= 0)
 			stream_ << log_severity_name(severity_);
 		else
 			stream_ << "VERBOSE" << -severity_;
 
-		stream_ << ":" << filename << "(" << line << ")]";
+		stream_ << ":" << filename.data() << "(" << line << ")]";
 
 		message_start_ = stream_.str().length();
 	}
@@ -197,6 +225,11 @@ namespace logging {
 		}
 	}
 
+	BASE_EXPORT std::string SystemErrorCodeToString(SystemErrorCode err_code)
+	{
+		return base::safe_strerror(error_code) + base::StringPrintf(" (%d)", error_code);
+	}
+
 	ErrnoLogMessage::ErrnoLogMessage(const char* file, int line, LogSeverity severity, SystemErrorCode err)
 		:err_(err),
 		log_message_(file, line, severity)
@@ -204,6 +237,12 @@ namespace logging {
 
 	}
 
+	ErrnoLogMessage::~ErrnoLogMessage()
+	{
+		stream() << ": " << SystemErrorCodeToString(err_);
+		int last_error = err_;
+		base::debug::Alias(&last_error);
+	}
 
 #endif
 }
