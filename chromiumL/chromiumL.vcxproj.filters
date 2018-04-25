@@ -4,9 +4,6 @@
     <Filter Include="sandbox">
       <UniqueIdentifier>{96508582-2995-473a-8c2a-5fe4bedae00b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="sandbox\tests">
-      <UniqueIdentifier>{a6a0cd7a-881d-4226-aa80-d9980a22e596}</UniqueIdentifier>
-    </Filter>
     <Filter Include="testing">
       <UniqueIdentifier>{ae5d16d3-1752-44c0-b790-8f5068f788a6}</UniqueIdentifier>
     </Filter>
@@ -40,16 +37,22 @@
     <Filter Include="base\files">
       <UniqueIdentifier>{6101f9e5-285d-4e22-acc4-46b72c7788b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sandbox\linux">
+      <UniqueIdentifier>{5f6d39ba-69ca-45bc-946f-d236d1b66dc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sandbox\linux\tests">
+      <UniqueIdentifier>{a6a0cd7a-881d-4226-aa80-d9980a22e596}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sandbox\linux\suid">
+      <UniqueIdentifier>{435304af-d551-4570-8da3-50cd2967c3fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sandbox\linux\suid\common">
+      <UniqueIdentifier>{54f0e681-7e2f-4b67-87e6-b517208e210a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sandbox\sandbox_export.h">
       <Filter>sandbox</Filter>
-    </ClInclude>
-    <ClInclude Include="sandbox\tests\test_utils.h">
-      <Filter>sandbox\tests</Filter>
-    </ClInclude>
-    <ClInclude Include="sandbox\tests\unit_test.h">
-      <Filter>sandbox\tests</Filter>
     </ClInclude>
     <ClInclude Include="testing\gtest\include\gtest\gtest.h">
       <Filter>testing\gtest\include\gtest</Filter>
@@ -96,14 +99,23 @@
     <ClInclude Include="base\strings\string_util.h">
       <Filter>base\strings</Filter>
     </ClInclude>
+    <ClInclude Include="base\files\file_util.h">
+      <Filter>base\files</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\linux\tests\test_utils.h">
+      <Filter>sandbox\linux\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\linux\tests\unit_test.h">
+      <Filter>sandbox\linux\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\linux\suid\common\sandbox.h">
+      <Filter>sandbox\linux\suid\common</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\linux\suid\process_util.h">
+      <Filter>sandbox\linux\suid</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sandbox\tests\main.cc">
-      <Filter>sandbox\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="sandbox\tests\test_utils.cpp">
-      <Filter>sandbox\tests</Filter>
-    </ClCompile>
     <ClCompile Include="base\logging.cpp">
       <Filter>base</Filter>
     </ClCompile>
@@ -121,6 +133,24 @@
     </ClCompile>
     <ClCompile Include="base\command_line.cpp">
       <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\files\file_path.cpp">
+      <Filter>base\files</Filter>
+    </ClCompile>
+    <ClCompile Include="base\files\file_util_posix.cpp">
+      <Filter>base\files</Filter>
+    </ClCompile>
+    <ClCompile Include="sandbox\linux\tests\main.cc">
+      <Filter>sandbox\linux\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="sandbox\linux\tests\test_utils.cpp">
+      <Filter>sandbox\linux\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="sandbox\linux\suid\sandbox.cpp">
+      <Filter>sandbox\linux\suid</Filter>
+    </ClCompile>
+    <ClCompile Include="sandbox\linux\suid\process_util_linux.cpp">
+      <Filter>sandbox\linux\suid</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

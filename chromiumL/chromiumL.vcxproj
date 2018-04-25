@@ -69,6 +69,7 @@
     <ClInclude Include="base\command_line.h" />
     <ClInclude Include="base\debug\stack_trace.h" />
     <ClInclude Include="base\files\file_path.h" />
+    <ClInclude Include="base\files\file_util.h" />
     <ClInclude Include="base\logging.h" />
     <ClInclude Include="base\macros.h" />
     <ClInclude Include="base\posix\eintr_wrapper.h" />
@@ -77,9 +78,11 @@
     <ClInclude Include="base\strings\string_util.h" />
     <ClInclude Include="base\test\test_suite.h" />
     <ClInclude Include="base\threading\platform_thread.h" />
+    <ClInclude Include="sandbox\linux\suid\common\sandbox.h" />
+    <ClInclude Include="sandbox\linux\suid\process_util.h" />
+    <ClInclude Include="sandbox\linux\tests\test_utils.h" />
+    <ClInclude Include="sandbox\linux\tests\unit_test.h" />
     <ClInclude Include="sandbox\sandbox_export.h" />
-    <ClInclude Include="sandbox\tests\test_utils.h" />
-    <ClInclude Include="sandbox\tests\unit_test.h" />
     <ClInclude Include="testing\gtest\include\gtest\gtest.h" />
     <ClInclude Include="testing\multiprocess_func_list.h" />
   </ItemGroup>
@@ -87,11 +90,15 @@
     <ClCompile Include="base\command_line.cpp" />
     <ClCompile Include="base\debug\stack_trace.cpp" />
     <ClCompile Include="base\debug\stack_trace_posix.cpp" />
+    <ClCompile Include="base\files\file_path.cpp" />
+    <ClCompile Include="base\files\file_util_posix.cpp" />
     <ClCompile Include="base\logging.cpp" />
     <ClCompile Include="base\test\test_suite.cpp" />
     <ClCompile Include="base\threading\platform_thread_posix.cpp" />
-    <ClCompile Include="sandbox\tests\main.cc" />
-    <ClCompile Include="sandbox\tests\test_utils.cpp" />
+    <ClCompile Include="sandbox\linux\suid\process_util_linux.cpp" />
+    <ClCompile Include="sandbox\linux\suid\sandbox.cpp" />
+    <ClCompile Include="sandbox\linux\tests\main.cc" />
+    <ClCompile Include="sandbox\linux\tests\test_utils.cpp" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

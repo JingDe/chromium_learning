@@ -21,6 +21,7 @@ namespace base {
 
 		FilePath();
 		FilePath(const FilePath& that);
+		FilePath(FilePath&& that) noexcept; // ²»Å×³öÒì³£
 		explicit FilePath(StringPieceType path);
 
 		const StringType& value() const { return path_; }
