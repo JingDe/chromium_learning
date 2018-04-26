@@ -114,6 +114,9 @@
     <ClInclude Include="sandbox\linux\suid\process_util.h">
       <Filter>sandbox\linux\suid</Filter>
     </ClInclude>
+    <ClInclude Include="sandbox\linux\suid\common\suid_unsafe_environment_variables.h">
+      <Filter>sandbox\linux\suid\common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="base\logging.cpp">

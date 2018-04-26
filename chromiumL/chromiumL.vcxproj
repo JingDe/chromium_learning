@@ -79,6 +79,7 @@
     <ClInclude Include="base\test\test_suite.h" />
     <ClInclude Include="base\threading\platform_thread.h" />
     <ClInclude Include="sandbox\linux\suid\common\sandbox.h" />
+    <ClInclude Include="sandbox\linux\suid\common\suid_unsafe_environment_variables.h" />
     <ClInclude Include="sandbox\linux\suid\process_util.h" />
     <ClInclude Include="sandbox\linux\tests\test_utils.h" />
     <ClInclude Include="sandbox\linux\tests\unit_test.h" />
