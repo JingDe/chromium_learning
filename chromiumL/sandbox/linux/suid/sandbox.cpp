@@ -101,12 +101,14 @@ int main(int argc, char** argv)
 	if (!SetupChildEnvironment())
 		return 1;
 
-	execv(argv[1], &argv[1]);
+	// 执行沙箱化进程
+	execv(argv[1], &argv[1]); // 二进制文件的文件名、包括文件名在内的所有参数
 	FatalError("execv failed");
 
 	return 1;
 }
 
+// 放弃root权限，
 static bool DropRoot()
 {
 	if (prctl(PR_SET_DUMPABLE, 0, 0, 0, 0)) // 进程控制，prctl(PR_SET_DUMPABLE, SUID_DUMP_DISABLE, 0, 0, 0)
@@ -370,9 +372,11 @@ static bool SpawnChrootHelper()
 		if (msg != kMsgChrootMe)
 			FatalError("Unknown message from sandboxed process");
 
+		// sanity check
 		if(chdir(safedir))
 			FatalError("Cannot chdir into /proc/ directory");
 
+		// chroot，阻止访问文件系统命名空间
 		if (chroot(safedir))
 			FatalError("Cannot chroot into /proc/ directory");
 
@@ -389,9 +393,11 @@ static bool SpawnChrootHelper()
 
 		_exit(0);
 		// 成为僵尸进程，/proc/self/fd(info)成为空目录，并chroot到此目录
-		// 如果父进程wait次进程，根目录将消失
+		// 非root父进程不能打开"."或"/"目录
+		// 如果父进程wait本进程，根目录将消失
 	}
 
+	// 父进程
 	if (close(sv[0]))
 	{
 		close(sv[1]);
@@ -434,20 +440,20 @@ static bool SetupChildEnvironment()
 {
 	unsigned i;
 
-	// 由于是SUID，ld.so可能清楚一些环境变量
+	// 由于是SUID，ld.so可能清除一些环境变量
 	// 子进程可能需要这些环境变量
 	// 此处已抛弃root权限，所以只能在在用户允许下运行一个二进制
 
 	for (i = 0; kSUIDUnsafeEnvironmentVariables[i]; ++i)
 	{
-		const char* const envvar = kSUIDUnsafeEnvironmentVariables[i];
-		char* const saved_envvar = SandboxSavedEnvironmentVariable(envvar);
+		const char* const envvar = kSUIDUnsafeEnvironmentVariables[i]; // 环境变量XXX
+		char* const saved_envvar = SandboxSavedEnvironmentVariable(envvar); // SANDBOX_XXX
 		if (!saved_envvar)
 			return false;
 
 		const char* const value = getenv(saved_envvar);
 		if (value) {
-			setenv(envvar, value, 1 /* overwrite */);
+			setenv(envvar, value, 1 /* overwrite */); // 设置XXX的值为SANDBOX_XXX的值
 			unsetenv(saved_envvar);
 		}
 

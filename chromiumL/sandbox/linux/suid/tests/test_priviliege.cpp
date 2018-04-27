@@ -202,6 +202,7 @@ int main()
 
 	MoveToNewNamespaces();
 	printf("after MoveToNewNamespaces\n");
+	// 父进程不退出，进入新的命名空间，tid==1
 	printtid(1);
 
 	return 0;

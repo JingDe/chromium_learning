@@ -10,8 +10,8 @@ namespace sandbox {
 	static const char kSuidSandboxGetApiSwitch[] = "--get-api";
 	static const char kAdjustOOMScoreSwitch[] = "--adjust-oom-score";
 
-	static const char kSandboxDescriptorEnvironmentVarName[] = "SBX_D";
-	static const char kSandboxHelperPidEnvironmentVarName[] = "SBX_HELPER_PID";
+	static const char kSandboxDescriptorEnvironmentVarName[] = "SBX_D"; // 设置为套接字fd
+	static const char kSandboxHelperPidEnvironmentVarName[] = "SBX_HELPER_PID"; // 设置为helper的pid
 
 	static const int kSUIDSandboxApiNumber = 1; // SUID沙箱的API版本
 	static const char kSandboxEnvironmentApiRequest[] = "SBX_CHROME_API_RQ"; // 环境变量，请求的API版本

@@ -18,9 +18,17 @@ namespace base{
 	typedef pid_t PlatformThreadId;
 #endif
 
-	// 底层线程函数命名空间
+	// 底层线程函数的命名空间
 	class BASE_EXPORT PlatformThread {
 	public:
+		class BASE_EXPORT Delegate {
+		public:
+			virtual void ThreadMain() = 0;
+
+		protected:
+
+		};
+
 		static PlatformThreadId CurrentId();
 
 	private:
