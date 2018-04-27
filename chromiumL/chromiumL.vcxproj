@@ -70,14 +70,20 @@
     <ClInclude Include="base\debug\stack_trace.h" />
     <ClInclude Include="base\files\file_path.h" />
     <ClInclude Include="base\files\file_util.h" />
+    <ClInclude Include="base\files\scoped_file.h" />
     <ClInclude Include="base\logging.h" />
     <ClInclude Include="base\macros.h" />
     <ClInclude Include="base\posix\eintr_wrapper.h" />
+    <ClInclude Include="base\process\launch.h" />
+    <ClInclude Include="base\scoped_generic.h" />
     <ClInclude Include="base\strings\string_piece.h" />
     <ClInclude Include="base\strings\string_piece_forward.h" />
     <ClInclude Include="base\strings\string_util.h" />
     <ClInclude Include="base\test\test_suite.h" />
     <ClInclude Include="base\threading\platform_thread.h" />
+    <ClInclude Include="base\threading\simple_thread.h" />
+    <ClInclude Include="sandbox\linux\suid\client\setuid_sandbox_client.h" />
+    <ClInclude Include="sandbox\linux\suid\client\setuid_sandbox_host.h" />
     <ClInclude Include="sandbox\linux\suid\common\sandbox.h" />
     <ClInclude Include="sandbox\linux\suid\common\suid_unsafe_environment_variables.h" />
     <ClInclude Include="sandbox\linux\suid\process_util.h" />
@@ -88,7 +94,6 @@
     <ClInclude Include="testing\multiprocess_func_list.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\chromium68\chromium\sandbox\linux\suid\tests\test_priviliege.cpp" />
     <ClCompile Include="base\command_line.cpp" />
     <ClCompile Include="base\debug\stack_trace.cpp" />
     <ClCompile Include="base\debug\stack_trace_posix.cpp" />
@@ -99,6 +104,7 @@
     <ClCompile Include="base\threading\platform_thread_posix.cpp" />
     <ClCompile Include="sandbox\linux\suid\process_util_linux.cpp" />
     <ClCompile Include="sandbox\linux\suid\sandbox.cpp" />
+    <ClCompile Include="sandbox\linux\suid\tests\test_priviliege.cpp" />
     <ClCompile Include="sandbox\linux\tests\main.cc" />
     <ClCompile Include="sandbox\linux\tests\test_utils.cpp" />
   </ItemGroup>

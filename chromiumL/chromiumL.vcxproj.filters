@@ -52,6 +52,12 @@
     <Filter Include="sandbox\linux\suid\tests">
       <UniqueIdentifier>{709c0a76-9893-4201-a3ef-54d6484878ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sandbox\linux\suid\client">
+      <UniqueIdentifier>{0e8ba573-c973-4719-8f8b-a2e98614ec52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\process">
+      <UniqueIdentifier>{234d1f12-206d-4073-9c18-295c15b6a459}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sandbox\sandbox_export.h">
@@ -120,6 +126,24 @@
     <ClInclude Include="sandbox\linux\suid\common\suid_unsafe_environment_variables.h">
       <Filter>sandbox\linux\suid\common</Filter>
     </ClInclude>
+    <ClInclude Include="sandbox\linux\suid\client\setuid_sandbox_client.h">
+      <Filter>sandbox\linux\suid\client</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\linux\suid\client\setuid_sandbox_host.h">
+      <Filter>sandbox\linux\suid\client</Filter>
+    </ClInclude>
+    <ClInclude Include="base\process\launch.h">
+      <Filter>base\process</Filter>
+    </ClInclude>
+    <ClInclude Include="base\files\scoped_file.h">
+      <Filter>base\files</Filter>
+    </ClInclude>
+    <ClInclude Include="base\scoped_generic.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\threading\simple_thread.h">
+      <Filter>base\threading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="base\logging.cpp">
@@ -158,7 +182,7 @@
     <ClCompile Include="sandbox\linux\suid\process_util_linux.cpp">
       <Filter>sandbox\linux\suid</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\chromium68\chromium\sandbox\linux\suid\tests\test_priviliege.cpp">
+    <ClCompile Include="sandbox\linux\suid\tests\test_priviliege.cpp">
       <Filter>sandbox\linux\suid\tests</Filter>
     </ClCompile>
   </ItemGroup>
