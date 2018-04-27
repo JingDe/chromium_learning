@@ -4,6 +4,7 @@
 #include<cstdlib>
 #include<cstring>
 #include<climits>
+#include<cstdarg>
 
 #include<unistd.h>
 #include<errno.h>
@@ -18,8 +19,8 @@
 #include<sched.h>
 
 #include"sandbox/linux/suid/process_util.h"
-#include"base/posix/eintr_wrapper.h"
 #include"sandbox/linux/suid/common/suid_unsafe_environment_variables.h"
+#include"base/posix/eintr_wrapper.h"
 
 #if !defined(CLONE_NEWPID)
 #define CLONE_NEWPID 0x20000000
@@ -31,21 +32,14 @@
 
 using namespace sandbox;
 
+	// 使编译器检查函数声明和函数实际调用参数之间的格式化字符串是否匹配
 static void FatalError(const char* msg, ...) __attribute__((noreturn, format(printf, 1, 2)));
-// 使编译器检查函数声明和函数实际调用参数之间的格式化字符串是否匹配
-
 static bool DropRoot();
-
 static void WaitForChildAndExit(pid_t child_pid);
-
 static void ExitWithErrorSignalHandler(int signal);
-
 bool CheckAndExportApiVersion();
-
 static bool MoveToNewNamespaces();
-
 static bool SpawnChrootHelper();
-
 static bool SetupChildEnvironment();
 
 int main(int argc, char** argv)
@@ -62,6 +56,7 @@ int main(int argc, char** argv)
 	if (argc == 2 && 0 == strcmp(argv[1], kSuidSandboxGetApiSwitch)) // --get-api
 	{
 		printf("%d\n", kSUIDSandboxApiNumber); // 1
+		return 0;
 	}
 
 	// sandbox --adjust-oom-score pid_t score
@@ -114,7 +109,7 @@ int main(int argc, char** argv)
 
 static bool DropRoot()
 {
-	if (prctl(PR_SET_DUMPABLE, 0, 0, 0, 0)) // prctl(PR_SET_DUMPABLE, SUID_DUMP_DISABLE, 0, 0, 0)
+	if (prctl(PR_SET_DUMPABLE, 0, 0, 0, 0)) // 进程控制，prctl(PR_SET_DUMPABLE, SUID_DUMP_DISABLE, 0, 0, 0)
 	{
 		perror("prctl(PR_SET_DUMPABLE)");
 		return false;
@@ -127,7 +122,7 @@ static bool DropRoot()
 	}
 
 	gid_t rgid, egid, sgid;
-	if (getresgid(&rgid, &egid, &sgid))
+	if (getresgid(&rgid, &egid, &sgid)) // 返回调用进程的实际用户id、有效用户id、saved用户id
 	{
 		perror("getresgit");
 		return false;
@@ -284,6 +279,7 @@ static bool MoveToNewNamespaces()
 			break;
 		}
 
+		// 子进程
 		// 若返回错误EINVAL，表明系统不支持该信号，继续下一组
 		// 若返回错误不是EINVAL，
 		if (errno != EINVAL)
@@ -459,4 +455,16 @@ static bool SetupChildEnvironment()
 	}
 
 	return true;
+}
+
+static void FatalError(const char* msg, ...)
+{
+	va_list ap;
+	va_start(ap, msg);
+
+	vfprintf(stderr, msg, ap);
+	fprintf(stderr, ": %s\n", strerror(errno));
+	fflush(stderr);
+	va_end(ap);
+	_exit(1);
 }

@@ -49,6 +49,9 @@
     <Filter Include="sandbox\linux\suid\common">
       <UniqueIdentifier>{54f0e681-7e2f-4b67-87e6-b517208e210a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sandbox\linux\suid\tests">
+      <UniqueIdentifier>{709c0a76-9893-4201-a3ef-54d6484878ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sandbox\sandbox_export.h">
@@ -154,6 +157,9 @@
     </ClCompile>
     <ClCompile Include="sandbox\linux\suid\process_util_linux.cpp">
       <Filter>sandbox\linux\suid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\chromium68\chromium\sandbox\linux\suid\tests\test_priviliege.cpp">
+      <Filter>sandbox\linux\suid\tests</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

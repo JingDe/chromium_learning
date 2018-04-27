@@ -13,9 +13,9 @@ namespace sandbox {
 	static const char kSandboxDescriptorEnvironmentVarName[] = "SBX_D";
 	static const char kSandboxHelperPidEnvironmentVarName[] = "SBX_HELPER_PID";
 
-	static const int kSUIDSandboxApiNumber = 1;
-	static const char kSandboxEnvironmentApiRequest[] = "SBX_CHROME_API_RQ";
-	static const char kSandboxEnvironmentApiProvides[] = "SBX_CHROME_API_PRV";
+	static const int kSUIDSandboxApiNumber = 1; // SUID沙箱的API版本
+	static const char kSandboxEnvironmentApiRequest[] = "SBX_CHROME_API_RQ"; // 环境变量，请求的API版本
+	static const char kSandboxEnvironmentApiProvides[] = "SBX_CHROME_API_PRV"; // 环境变量，设置为SUID沙箱的API版本
 
 	// This number must be kept in sync with common/zygote_commands_linux.h
 	static const int kZygoteIdFd = 7;

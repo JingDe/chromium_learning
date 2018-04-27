@@ -88,6 +88,7 @@
     <ClInclude Include="testing\multiprocess_func_list.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\chromium68\chromium\sandbox\linux\suid\tests\test_priviliege.cpp" />
     <ClCompile Include="base\command_line.cpp" />
     <ClCompile Include="base\debug\stack_trace.cpp" />
     <ClCompile Include="base\debug\stack_trace_posix.cpp" />
